@@ -1,7 +1,7 @@
 package ivan.jpatest.model;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Data
+@RestResource(path="tasks", rel="tasks")
 public class SimpleTask {
 
     public SimpleTask() {

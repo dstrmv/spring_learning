@@ -1,6 +1,7 @@
 package ivan.jpatest.model;
 
 import lombok.Data;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.util.ArrayList;

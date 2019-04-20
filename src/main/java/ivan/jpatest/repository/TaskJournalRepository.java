@@ -1,9 +1,11 @@
 package ivan.jpatest.repository;
 
 import ivan.jpatest.model.SimpleTaskJournal;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-public interface TaskJournalRepository extends CrudRepository<SimpleTaskJournal, Long> {
+@RepositoryRestResource(collectionResourceRel = "taskjournals", path = "taskjournals")
+public interface TaskJournalRepository extends PagingAndSortingRepository<SimpleTaskJournal, Long> {
 
 
 

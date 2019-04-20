@@ -35,18 +35,28 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         TextComment comment = new TextComment("this is comment 1");
         TextComment comment2 = new TextComment("this is comment 2");
 
-        SimpleTask task = new SimpleTask();
-        task.setActive(true);
-        task.setName("this is simple task");
-        task.setDescription("this is task description");
-        task.setExpires(LocalDateTime.now());
-        task.getComments().add(comment);
-        task.getComments().add(comment2);
+        TextComment comment3 = new TextComment("comment for task 2");
+
+        SimpleTask task1 = new SimpleTask();
+        SimpleTask task2 = new SimpleTask();
+
+        task1.setActive(true);
+        task1.setName("this is simple task");
+        task1.setDescription("this is task description");
+        task1.setExpires(LocalDateTime.now());
+        task1.getComments().add(comment);
+        task1.getComments().add(comment2);
+
+        task2.setActive(true);
+        task2.setName("task 2");
+        task2.setDescription("second task");
+        task2.setExpires(LocalDateTime.now());
 
         SimpleTaskJournal taskJournal = new SimpleTaskJournal();
-        taskJournal.setName("taskjournal");
+        taskJournal.setName("journal name");
         taskJournal.setDescription("description tj");
-        taskJournal.getTasks().add(task);
+        taskJournal.getTasks().add(task1);
+        taskJournal.getTasks().add(task2);
 
         taskJournalRepository.save(taskJournal);
 
