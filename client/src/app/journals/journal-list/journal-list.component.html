@@ -1,1 +1,19 @@
-<app-journal-item></app-journal-item>
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success">New Journal</button>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <a href="#" class="list-group-item clearfix" *ngFor="let journal of journals">
+      <div class="pull-left">
+        <h4 class="list-group-item-heading">{{ journal.name }}</h4>
+        <p class="list-group-item-text">{{ journal.description }}</p>
+      </div>
+    </a>
+    <app-journal-item></app-journal-item>
+  </div>
+</div>
+
+
