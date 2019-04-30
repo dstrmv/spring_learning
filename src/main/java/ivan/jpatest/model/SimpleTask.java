@@ -25,4 +25,7 @@ public class SimpleTask {
     @OneToMany(cascade = CascadeType.ALL)
     private List<TextComment> comments;
 
+    @ManyToOne
+    private SimpleTaskJournal simpleTaskJournal;
+
 }

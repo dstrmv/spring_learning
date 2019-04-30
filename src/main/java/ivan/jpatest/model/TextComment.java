@@ -2,12 +2,8 @@ package ivan.jpatest.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.rest.core.annotation.RestResource;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -21,7 +17,9 @@ public class TextComment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String content;
+
+    @ManyToOne
+    private SimpleTask simpleTask;
 
 }
