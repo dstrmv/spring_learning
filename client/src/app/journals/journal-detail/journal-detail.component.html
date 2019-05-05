@@ -1,30 +1,35 @@
 <div class="row">
   <div class="col-xs-12">
-    <h1>Journal Name</h1>
+    <h1>{{ journal.name }}</h1>
+    <h4>{{journal.description}}</h4>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <div class="btn-group">
-      <button type="button" class="btn btn-primary dropdown-toggle" >
+    <div class="btn-group"
+         appDropdown>
+      <button type="button" class="btn btn-primary dropdown-toggle">
         Manage Journal
         <span class="caret"></span>
       </button>
-      <ul class="dropdown">
-        <li><a href="#">Add Task</a></li>
-        <li><a href="#">Edit Journal</a></li>
-        <li><a href="#">Delete Journal</a></li>
+      <ul class="dropdown-menu">
+        <li><a style="cursor: pointer;">Add Task</a></li>
+        <li><a style="cursor: pointer;" (click)="onEditJournal()">Edit Journal</a></li>
+        <li><a style="cursor: pointer;">Delete Journal</a></li>
       </ul>
     </div>
   </div>
+
   <div class="row">
     <div class="col-xs-12">
-      Description
+      <ul class="list-group">
+        <li class="list-group-item"
+            *ngFor="let task of journal.tasks">
+          {{task.name}} - {{task.description}}; {{task.expires}}
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12">
-      Tasks
-    </div>
-  </div>
+
+
 </div>

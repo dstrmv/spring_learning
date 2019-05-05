@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Journal } from '../journal.model';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { JournalService } from '../journal.service';
 
 @Component({
   selector: 'app-journal-detail',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JournalDetailComponent implements OnInit {
 
-  constructor() { }
+  journal: Journal;
+  id: number;
 
-  ngOnInit() {
+  constructor(private journalService: JournalService,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
+  ngOnInit() {
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.id = +params.id;
+        this.journal = this.journalService.getJournal(this.id);
+      }
+    );
+  }
+
+  onEditJournal() {
+    this.router.navigate(['edit'], {relativeTo: this.route});
+  }
 }

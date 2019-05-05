@@ -2,7 +2,6 @@ import { Task } from '../tasks/task.model';
 
 export class Journal {
 
-
   public tasks: Task[];
   public name: string;
   public description: string;

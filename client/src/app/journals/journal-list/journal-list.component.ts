@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Journal } from "../journal.model";
-import { Task } from "../../tasks/task.model";
+import { Journal } from '../journal.model';
+import { JournalService } from '../journal.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-journal-list',
@@ -9,16 +10,19 @@ import { Task } from "../../tasks/task.model";
 })
 export class JournalListComponent implements OnInit {
 
-  journals: Journal[] = [
-    new Journal('Test Journal', 'This is a test journal',
-      [new Task('Task of journal 1', 'just task', new Date().toLocaleString()),
-        new Task('Second task of journal 1', 'just task=)))', new Date().toLocaleString())]),
-    new Journal('Second Journal', 'One more journal', [])
-  ];
+  journals: Journal[];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private journalService: JournalService,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
+  ngOnInit() {
+    this.journals = this.journalService.getJournals();
+  }
+
+  onNewJournal() {
+    this.router
+      .navigate(['new'], {relativeTo: this.route});
+  }
 }

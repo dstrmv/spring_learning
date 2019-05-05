@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Journal } from '../../journal.model';
 
 @Component({
   selector: 'app-journal-item',
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JournalItemComponent implements OnInit {
 
-  constructor() { }
+  @Input() journal: Journal;
+  @Input() index: number;
 
   ngOnInit() {
   }
-
 }
