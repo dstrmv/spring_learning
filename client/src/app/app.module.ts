@@ -3,29 +3,32 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { JournalsComponent } from './journals/journals.component';
-import { JournalListComponent } from './journals/journal-list/journal-list.component';
-import { JournalDetailComponent } from './journals/journal-detail/journal-detail.component';
-import { JournalItemComponent } from './journals/journal-list/journal-item/journal-item.component';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { AppRoutingModule } from './app-routing.module';
-import { JournalStartComponent } from './journals/journal-start/journal-start.component';
-import { JournalEditComponent } from './journals/journal-edit/journal-edit.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TasksComponent } from './tasks/tasks.component';
+import { TaskStartComponent } from './tasks/task-start/task-start.component';
+import { TaskListComponent } from './tasks/task-list/task-list.component';
+import { TaskEditComponent } from './tasks/task-edit/task-edit.component';
+import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
+import { TaskItemComponent } from './tasks/task-list/task-item/task-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    JournalsComponent,
-    JournalListComponent,
-    JournalDetailComponent,
-    JournalItemComponent,
     DropdownDirective,
-    JournalStartComponent,
-    JournalEditComponent
+    TasksComponent,
+    TaskStartComponent,
+    TaskListComponent,
+    TaskEditComponent,
+    TaskDetailComponent,
+    TaskItemComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [],

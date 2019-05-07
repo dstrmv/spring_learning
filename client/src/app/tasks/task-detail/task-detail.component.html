@@ -1,7 +1,8 @@
 <div class="row">
   <div class="col-xs-12">
-    <h1>{{ journal.name }}</h1>
-    <h4>{{journal.description}}</h4>
+    <h1>{{ task.name }}</h1>
+    <h4>{{ task.description }}</h4>
+    <h4>{{ task.expires | date:'short' }}</h4>
   </div>
 </div>
 <div class="row">
@@ -9,13 +10,13 @@
     <div class="btn-group"
          appDropdown>
       <button type="button" class="btn btn-primary dropdown-toggle">
-        Manage Journal
+        Manage Task
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
-        <li><a style="cursor: pointer;">Add Task</a></li>
-        <li><a style="cursor: pointer;" (click)="onEditJournal()">Edit Journal</a></li>
-        <li><a style="cursor: pointer;">Delete Journal</a></li>
+        <li><a style="cursor: pointer;">Add Comment</a></li>
+        <li><a style="cursor: pointer;" (click)="onEditTask()">Edit Task</a></li>
+        <li><a style="cursor: pointer;" (click)="onDeleteTask()">Delete Task</a></li>
       </ul>
     </div>
   </div>
@@ -24,8 +25,8 @@
     <div class="col-xs-12">
       <ul class="list-group">
         <li class="list-group-item"
-            *ngFor="let task of journal.tasks">
-          {{task.name}} - {{task.description}}; {{task.expires}}
+            *ngFor="let comment of task.comments">
+          {{ comment.content }}
         </li>
       </ul>
     </div>
