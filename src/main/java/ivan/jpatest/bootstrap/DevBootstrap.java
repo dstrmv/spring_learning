@@ -47,9 +47,6 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         task1.getComments().add(comment);
         task1.getComments().add(comment2);
 
-        comment.setSimpleTask(task1);
-        comment2.setSimpleTask(task1);
-
         task2.setActive(true);
         task2.setName("task 2");
         task2.setDescription("second task");
@@ -60,9 +57,6 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         taskJournal.setDescription("description tj");
         taskJournal.getTasks().add(task1);
         taskJournal.getTasks().add(task2);
-
-        task1.setSimpleTaskJournal(taskJournal);
-        task2.setSimpleTaskJournal(taskJournal);
 
         taskJournalRepository.save(taskJournal);
 

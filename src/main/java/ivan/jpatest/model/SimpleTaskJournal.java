@@ -1,7 +1,6 @@
 package ivan.jpatest.model;
 
 import lombok.Data;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,6 +21,6 @@ public class SimpleTaskJournal {
     private String name;
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SimpleTask> tasks;
 }

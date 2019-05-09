@@ -1,24 +1,51 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../model/task.model';
 import { Subject } from 'rxjs';
-import { Comment } from '../model/comment.model';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { map } from "rxjs/operators";
+
+interface TasksResponse {
+
+  _embedded: {
+    tasks: Task[],
+    _links: {
+      href: string
+    }
+  }
+}
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'text/uri-list'})
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
+  private tasksUrl: string = 'http://localhost:8080/api/journals/1/tasks';
+  private journalUrl: string = 'http://localhost:8080/api/journals/1';
+  private taskPostUrl: string = 'http://localhost:8080/api/tasks';
+
+
   tasksChanged = new Subject();
 
-  private tasks: Task[] = [
-    new Task('First Task', 'Test task', new Date(), []),
-    new Task('Second Task', 'One more test task', new Date(), [new Comment('comment')]),
-  ];
+  private tasks: Task[] = [];
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
   getTasks() {
+    this.http.get<TasksResponse>(this.tasksUrl).pipe(
+      map(response => response._embedded.tasks)
+    ).subscribe(
+      tasks => {
+        this.tasks = tasks;
+        console.log(tasks);
+        this.tasksChanged.next(this.tasks.slice());
+      }
+    );
+
     return this.tasks.slice(); // array copy
   }
 
@@ -27,17 +54,45 @@ export class TaskService {
   }
 
   addTask(task: Task) {
-    this.tasks.push(task);
-    this.tasksChanged.next(this.tasks.slice());
+
+    let link: string;
+    this.http.post<any>(this.taskPostUrl, task).subscribe(
+      response => {
+        task = response;
+        this.http.post(this.tasksUrl, task._links.self.href, httpOptions).subscribe(
+          response => {
+            this.tasks.push(task);
+            this.tasksChanged.next(this.tasks.slice());
+          }
+        );
+      }
+    );
   }
 
+
   updateTask(id: number, task: Task) {
-    this.tasks[id] = task;
-    this.tasksChanged.next(this.tasks.slice());
+
+    let link = this.tasks[id]._links.self.href;
+
+    this.http.put<Task>(link, task).subscribe(
+      task => {
+        this.tasks[id] = task;
+        this.tasksChanged.next(this.tasks.slice());
+      }
+    );
+
+    //this.tasks[id] = task;
+    //this.tasksChanged.next(this.tasks.slice());
   }
 
   deleteTask(id: number) {
-    this.tasks.splice(id, 1);
-    this.tasksChanged.next(this.tasks.slice());
+    let task = this.tasks[id];
+
+    this.http.delete(this.journalUrl + '/tasks/' + task.id).subscribe(
+      resp => {
+        this.tasks.splice(id, 1);
+        this.tasksChanged.next(this.tasks.slice());
+      }
+    );
   }
 }

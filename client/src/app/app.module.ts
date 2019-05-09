@@ -12,6 +12,7 @@ import { TaskListComponent } from './tasks/task-list/task-list.component';
 import { TaskEditComponent } from './tasks/task-edit/task-edit.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskItemComponent } from './tasks/task-list/task-item/task-item.component';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { TaskItemComponent } from './tasks/task-list/task-item/task-item.compone
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],

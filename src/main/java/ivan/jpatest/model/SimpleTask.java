@@ -22,10 +22,7 @@ public class SimpleTask {
     private String description;
     private LocalDateTime expires;
     private boolean active;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TextComment> comments;
-
-    @ManyToOne
-    private SimpleTaskJournal simpleTaskJournal;
 
 }
