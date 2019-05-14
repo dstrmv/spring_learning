@@ -36,4 +36,8 @@ export class TaskDetailComponent implements OnInit {
     this.taskService.deleteTask(this.id);
     this.router.navigate(['/tasks']);
   }
+
+  isString() {
+    return typeof this.task.expires == 'string';
+  }
 }

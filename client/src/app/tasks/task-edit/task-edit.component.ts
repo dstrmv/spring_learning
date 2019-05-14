@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from '../task.service';
+import * as moment from 'moment';
+import { Task } from "../../model/task.model";
 
 @Component({
   selector: 'app-task-edit',
@@ -55,7 +57,7 @@ export class TaskEditComponent implements OnInit {
     this.taskForm = new FormGroup({
       name: new FormControl(taskName, Validators.required),
       description: new FormControl(taskDescription),
-      expires: new FormControl(taskExpires, Validators.required),
+      expires: new FormControl(moment(taskExpires).format('DD.MM.YYYY, HH:mm:ss'), Validators.required),
       comments: taskComments
     });
   }
@@ -70,10 +72,15 @@ export class TaskEditComponent implements OnInit {
 
   onSubmit() {
 
+    let task: Task = this.taskForm.value;
+    console.log(task.expires);
+    task.expires = moment.parseZone(this.taskForm.value.expires, 'DD.MM.YYYY, HH:mm:ss').toDate();
+    console.log(task.expires);
+
     if (this.editMode) {
-      this.taskService.updateTask(this.id, this.taskForm.value);
+      this.taskService.updateTask(this.id, task);
     } else {
-      this.taskService.addTask(this.taskForm.value);
+      this.taskService.addTask(task);
     }
     this.onCancel();
   }
@@ -85,4 +92,6 @@ export class TaskEditComponent implements OnInit {
   onDeleteComment(i: number) {
     (this.taskForm.get('comments') as FormArray).removeAt(i);
   }
+
+
 }

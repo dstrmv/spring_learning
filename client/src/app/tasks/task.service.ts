@@ -27,7 +27,6 @@ export class TaskService {
   private journalUrl: string = 'http://localhost:8080/api/journals/1';
   private taskPostUrl: string = 'http://localhost:8080/api/tasks';
 
-
   tasksChanged = new Subject();
 
   private tasks: Task[] = [];

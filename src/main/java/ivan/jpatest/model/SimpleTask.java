@@ -1,5 +1,7 @@
 package ivan.jpatest.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,9 +22,12 @@ public class SimpleTask {
     private Long id;
     private String name;
     private String description;
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    //@JsonFormat(pattern="dd.MM.yyyy, HH:mm:ss")
     private LocalDateTime expires;
     private boolean active;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+
     private List<TextComment> comments;
 
 }

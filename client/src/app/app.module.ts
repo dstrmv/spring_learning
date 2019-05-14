@@ -13,6 +13,8 @@ import { TaskEditComponent } from './tasks/task-edit/task-edit.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskItemComponent } from './tasks/task-list/task-item/task-item.component';
 import { HttpClientModule } from "@angular/common/http";
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { HttpClientModule } from "@angular/common/http";
     TaskListComponent,
     TaskEditComponent,
     TaskDetailComponent,
-    TaskItemComponent
+    TaskItemComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,

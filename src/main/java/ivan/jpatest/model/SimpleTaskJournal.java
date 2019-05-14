@@ -23,4 +23,7 @@ public class SimpleTaskJournal {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SimpleTask> tasks;
+
+    @OneToOne
+    private User user;
 }
